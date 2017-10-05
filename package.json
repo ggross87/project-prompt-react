@@ -1,0 +1,26 @@
+{
+  "name": "project-prompt-react",
+  "version": "1.0.0",
+  "description": "This exercise is to create a web client application using a Web service API wirtten in ReactJS.",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ggross87/project-prompt-react.git"
+  },
+  "author": "Germanual Gross",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ggross87/project-prompt-react/issues"
+  },
+  "homepage": "https://github.com/ggross87/project-prompt-react#readme",
+  "dependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "webpack": "^3.6.0"
+  }
+}
