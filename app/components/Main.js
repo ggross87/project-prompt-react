@@ -1,53 +1,70 @@
-//Dependencies
-var React = require('react');
+// Include React as a dependency
+var React = require("react");
 
-// Here I include all of the sub-components
-var Search = require("./children/Search");
-var Results = require("./children/Results");
-var History = require("./children/History");
+var helpers = require("../utils/helpers");
+//sub-components
+var Search = require("./Search");
+var Saved = require("./Saved");
 
-// Helper for making AJAX requests to my API's
-var helpers = require("./utils/helpers");
-
-//creating Main Component to search and fetch results
+// Creates the Main components
 var Main = React.createClass({
-  getInitialState: function(){
-    return { search: ["","",""], results: []};
-  },
-  //loads when page is ready
-  componentDidMount: function(){
-    //gets all saved articles
-    helpers.getSaved().then(function(response) {
-      console.log("Saved: " + response.data);
-      this.setState({ saved: response.data });
-    }.bind(this));
-  },
-  //any time a component changes, it updates
-  componentDidUpdate: function(){
-    var searchTerms = this.state.search;
-      // Run the query for the address
-      helpers.runQuery(searchTerms[0], searchTerms[1], searchTerms[2]).then(function(data) {
-        if(data !== this.state.results){
-          console.log("Results," + data);
-          this.setState({ results: data });
 
-          // After we've received the result... then post the search term to our history.
-          helpers.postSaved(this.state.search).then(function() {
-            console.log("Updated!");
-          }.bind(this));
-        }
-      }.bind(this));
-  },
-  //lets children update to parent
-  setSearch: function(topic, startYear, endYear){
-    this.setState({ search: [topic, startYear, endYear] });
-  },
-  //Render the function
-  render: function(){
+  render: function() {
+
     return (
-      
+      <div className="main-container">
+        <div className="container">
+          {/* Navbar */}
+          <nav className="navbar navbar-default" role="navigation">
+            <div className="container-fluid">
+              <div className="navbar-header">
+                <button
+                  type="button"
+                  className="navbar-toggle"
+                  data-toggle="collapse"
+                  data-target=".navbar-ex1-collapse"
+                >
+                  <span className="sr-only">Toggle navigation</span>
+                  <span className="icon-bar"></span>
+                  <span className="icon-bar"></span>
+                  <span className="icon-bar"></span>
+                </button>
+                <Link className="navbar-brand" to="/">Search API</Link>
+              </div>
+
+              <div className="collapse navbar-collapse navbar-ex1-collapse">
+                <ul className="nav navbar-nav navbar-right">
+                  {/* Using <Link> in place of <a> and "to" in place of "href" */}
+                  <li><Link to="/search">Search for Carrier's</Link></li>
+                  <li><Link to="/saved">Saved Carrier's</Link></li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+
+          {/* Jumbotron */}
+          <div className="jumbotron">
+            <h2 className="text-center"><strong>(ReactJS) Search for Freight Carrier's by Location </strong></h2>
+            {/* <h3 className="text-center">Search for Freight Carrier's by City.</h3> */}
+          </div>
+
+
+          {/* Here I deploy the sub components (Search or Saved */}
+          {/* These sub-components are getting passed as this.props.children */}
+          {this.props.children}
+
+          <footer>
+            <hr />
+            <p className="pull-right">
+              <i className="fa fa-github" aria-hidden="true"></i>
+              Proudly built using React.js
+            </p>
+          </footer>
+        </div>
+      </div>
     );
   }
 });
 
+// Export the module back to the route
 module.exports = Main;

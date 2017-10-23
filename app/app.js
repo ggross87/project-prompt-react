@@ -1,9 +1,10 @@
-//Dependencies
-var React = require('react');
-var ReactDOM = require('react-dom');
 
-//Include Main Component
-var Main = require('./components/Main');
+// Include the Main React Dependencies
+import React from "react";
+import ReactDOM from "react-dom";
 
-//render Main component
-ReactDOM.render(<Main />, document.getElementById('app'));
+// Include the Main Component
+import Main from "./components/Main";
+
+// This code here allows us to render our main component (in this case "Main")
+ReactDOM.render(<Main />, document.getElementById("app"));
